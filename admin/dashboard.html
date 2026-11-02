@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Usman Mens Wear</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👔</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-brand">
+      <i class="bi bi-shield-check text-accent"></i>
+      <div>USMAN <span>ADMIN</span></div>
+    </div>
+
+    <ul class="admin-nav-menu">
+      <li class="admin-nav-item active">
+        <a href="dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a>
+      </li>
+      <li class="admin-nav-item">
+        <a href="products.html"><i class="bi bi-tags"></i> Products</a>
+      </li>
+      <li class="admin-nav-item">
+        <a href="add-product.html"><i class="bi bi-plus-square"></i> Add Product</a>
+      </li>
+      <li class="admin-nav-item">
+        <a href="orders.html"><i class="bi bi-box-seam"></i> Orders</a>
+      </li>
+      <li class="admin-nav-item">
+        <a href="customers.html"><i class="bi bi-people"></i> Customers</a>
+      </li>
+      <li class="admin-nav-item">
+        <a href="inventory.html"><i class="bi bi-archive"></i> Inventory</a>
+      </li>
+      <li class="admin-nav-item">
+        <a href="coupons.html"><i class="bi bi-ticket-perforated"></i> Coupons</a>
+      </li>
+    </ul>
+
+    <div class="admin-sidebar-footer">
+      <a href="../index.html" class="text-white small" target="_blank">
+        <i class="bi bi-box-arrow-up-right me-1 text-accent"></i> View Store
+      </a>
+      <a href="#" id="adminLogoutBtn" class="text-danger small">
+        <i class="bi bi-power"></i> Logout
+      </a>
+    </div>
+  </aside>
+
+  <!-- Main Content Wrapper -->
+  <div class="admin-main-wrapper">
+    
+    <!-- Top Nav -->
+    <header class="admin-top-nav">
+      <button class="btn btn-sm btn-outline-dark d-lg-none" id="btnToggleSidebar">
+        <i class="bi bi-list fs-5"></i>
+      </button>
+
+      <h5 class="mb-0 fw-bold d-none d-sm-block">Store Analytics &amp; Control</h5>
+
+      <div class="user-profile-badge">
+        <div class="avatar-circle">A</div>
+        <div class="d-none d-md-block">
+          <strong class="d-block text-dark small" id="adminProfileName">Master Admin</strong>
+          <small class="text-muted" style="font-size: 0.72rem;">Store Director</small>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="admin-content">
+      
+      <!-- Metrics Grid -->
+      <div class="row g-4 mb-4">
+        <!-- Sales -->
+        <div class="col-sm-6 col-xl-3">
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Total Revenue</div>
+              <div class="stat-value" id="statTotalSales">₹0</div>
+            </div>
+            <div class="stat-icon icon-gold"><i class="bi bi-currency-rupee"></i></div>
+          </div>
+        </div>
+        <!-- Orders -->
+        <div class="col-sm-6 col-xl-3">
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Total Orders</div>
+              <div class="stat-value" id="statTotalOrders">0</div>
+            </div>
+            <div class="stat-icon icon-dark"><i class="bi bi-bag-check"></i></div>
+          </div>
+        </div>
+        <!-- Customers -->
+        <div class="col-sm-6 col-xl-3">
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Customers</div>
+              <div class="stat-value" id="statTotalCustomers">0</div>
+            </div>
+            <div class="stat-icon icon-blue"><i class="bi bi-people"></i></div>
+          </div>
+        </div>
+        <!-- Low Stock -->
+        <div class="col-sm-6 col-xl-3">
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-label">Low Stock Alerts</div>
+              <div class="stat-value" id="statLowStock">0</div>
+            </div>
+            <div class="stat-icon icon-green"><i class="bi bi-exclamation-triangle"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="row g-4 mb-4">
+        <div class="col-lg-8">
+          <div class="admin-card h-100">
+            <div class="admin-card-header">
+              <h5>Monthly Revenue Progression</h5>
+              <span class="badge bg-light text-dark border">FY 2026</span>
+            </div>
+            <div class="p-4" style="height: 320px;">
+              <canvas id="salesChart"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="admin-card h-100">
+            <div class="admin-card-header">
+              <h5>Sales by Category</h5>
+            </div>
+            <div class="p-4" style="height: 320px;">
+              <canvas id="categoryChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Orders & Low Stock Row -->
+      <div class="row g-4">
+        <!-- Recent Orders -->
+        <div class="col-lg-8">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h5>Recent Customer Orders</h5>
+              <a href="orders.html" class="small text-accent fw-bold">View All Orders &rarr;</a>
+            </div>
+            <div class="table-responsive">
+              <table class="table admin-table">
+                <thead>
+                  <tr>
+                    <th>Order #</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="adminRecentOrdersBody">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Low Stock -->
+        <div class="col-lg-4">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h5>Inventory Warnings</h5>
+              <a href="inventory.html" class="small text-accent fw-bold">Manage &rarr;</a>
+            </div>
+            <div id="adminLowStockList">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../assets/js/products.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/cart.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/checkout.js"></script>
+  <script src="../assets/js/admin.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const admin = AuthManager.requireAdmin();
+      if (!admin) return;
+
+      document.getElementById('adminProfileName').textContent = admin.name;
+
+      AdminController.initDashboard();
+
+      // Mobile sidebar toggle
+      const toggleBtn = document.getElementById('btnToggleSidebar');
+      const sidebar = document.getElementById('adminSidebar');
+      if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener('click', () => {
+          sidebar.classList.toggle('show');
+        });
+      }
+
+      // Logout
+      document.getElementById('adminLogoutBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        AuthManager.logout();
+      });
+    });
+  </script>
+</body>
+</html>
+

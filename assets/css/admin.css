@@ -1,0 +1,315 @@
+/* ==========================================================================
+   USMAN MENS WEAR - ADMIN PANEL STYLESHEET
+   Clean, modern, responsive administrative interface
+   ========================================================================== */
+
+:root {
+  --admin-sidebar-bg: #171717;
+  --admin-sidebar-hover: #262626;
+  --admin-sidebar-active: #C6A15B;
+  --admin-bg: #F4F6F9;
+  --admin-card-bg: #FFFFFF;
+  --admin-border: #E5E7EB;
+  --admin-text: #1F2937;
+  --admin-muted: #6B7280;
+}
+
+body.admin-body {
+  background-color: var(--admin-bg);
+  color: var(--admin-text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  min-height: 100vh;
+  display: flex;
+}
+
+/* Sidebar */
+.admin-sidebar {
+  width: 260px;
+  background-color: var(--admin-sidebar-bg);
+  color: #E5E7EB;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  overflow-y: auto;
+}
+
+.admin-sidebar-brand {
+  padding: 22px 20px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-sidebar-brand span {
+  color: var(--admin-sidebar-active);
+}
+
+.admin-nav-menu {
+  list-style: none;
+  padding: 15px 0;
+  margin: 0;
+  flex: 1;
+}
+
+.admin-nav-item a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 22px;
+  color: #B3B9C4;
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.admin-nav-item a i {
+  font-size: 1.15rem;
+  width: 22px;
+}
+
+.admin-nav-item a:hover {
+  background-color: var(--admin-sidebar-hover);
+  color: #FFFFFF;
+}
+
+.admin-nav-item.active a {
+  background-color: rgba(198, 161, 91, 0.12);
+  color: var(--admin-sidebar-active);
+  border-left-color: var(--admin-sidebar-active);
+  font-weight: 600;
+}
+
+.admin-sidebar-footer {
+  padding: 18px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Admin Main Wrapper */
+.admin-main-wrapper {
+  margin-left: 260px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+/* Admin Header */
+.admin-top-nav {
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--admin-border);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 990;
+}
+
+.admin-top-nav .user-profile-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.admin-top-nav .avatar-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #171717;
+  color: #C6A15B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* Content Area */
+.admin-content {
+  padding: 28px;
+  flex: 1;
+}
+
+/* Metric / Stat Cards */
+.stat-card {
+  background: #FFFFFF;
+  border: 1px solid var(--admin-border);
+  border-radius: 6px;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.stat-info .stat-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--admin-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.stat-info .stat-value {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--admin-text);
+  line-height: 1.2;
+}
+
+.stat-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.stat-icon.icon-gold {
+  background: rgba(198, 161, 91, 0.15);
+  color: #A37F38;
+}
+
+.stat-icon.icon-dark {
+  background: rgba(23, 23, 23, 0.08);
+  color: #171717;
+}
+
+.stat-icon.icon-green {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+}
+
+.stat-icon.icon-blue {
+  background: rgba(59, 130, 246, 0.12);
+  color: #2563EB;
+}
+
+/* Admin Data Card & Tables */
+.admin-card {
+  background: #FFFFFF;
+  border: 1px solid var(--admin-border);
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.admin-card-header {
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--admin-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-card-header h5 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.admin-table {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.admin-table th {
+  background-color: #F9FAFB;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: var(--admin-muted);
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.admin-table td {
+  padding: 14px 18px;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--admin-border);
+  font-size: 0.88rem;
+}
+
+/* Status Badges */
+.badge-status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.badge-status.status-pending {
+  background-color: #FEF3C7;
+  color: #92400E;
+}
+
+.badge-status.status-confirmed {
+  background-color: #DBEAFE;
+  color: #1E40AF;
+}
+
+.badge-status.status-processing {
+  background-color: #E0E7FF;
+  color: #3730A3;
+}
+
+.badge-status.status-shipped {
+  background-color: #EDE9FE;
+  color: #5B21B6;
+}
+
+.badge-status.status-delivered {
+  background-color: #D1FAE5;
+  color: #065F46;
+}
+
+.badge-status.status-cancelled {
+  background-color: #FEE2E2;
+  color: #991B1B;
+}
+
+/* Admin Responsive Mobile Drawer */
+@media (max-width: 991.98px) {
+  .admin-sidebar {
+    transform: translateX(-100%);
+  }
+
+  .admin-sidebar.show {
+    transform: translateX(0);
+  }
+
+  .admin-main-wrapper {
+    margin-left: 0;
+  }
+}
+

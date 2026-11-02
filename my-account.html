@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account | Usman Mens Wear</title>
+  <meta name="description" content="Manage your personal profile, addresses, orders, and security settings.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👔</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar text-center">
+    <div class="container">
+      <span>FREE DELIVERY ACROSS INDIA ON ORDERS OVER ₹1,499 &bull; COUPON: <strong class="text-accent">WELCOME10</strong></span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <nav class="navbar navbar-expand-lg navbar-light py-2">
+      <div class="container">
+        <a class="navbar-brand navbar-brand-logo me-4" href="index.html">
+          <div>
+            USMAN <span class="brand-gold">MENS WEAR</span>
+            <span class="brand-subtitle">HAUTE SARTORIAL</span>
+          </div>
+        </a>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="shop.html">Shop All</a></li>
+            <li class="nav-item"><a class="nav-link" href="my-orders.html">My Orders</a></li>
+          </ul>
+        </div>
+
+        <div class="header-actions">
+          <a href="wishlist.html" class="action-icon-btn" title="Wishlist">
+            <i class="bi bi-heart"></i>
+            <span class="action-badge header-wishlist-count" style="display: none;">0</span>
+          </a>
+          <a href="cart.html" class="action-icon-btn" title="Shopping Bag">
+            <i class="bi bi-bag"></i>
+            <span class="action-badge header-cart-count" style="display: none;">0</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="bg-white border-bottom py-4">
+    <div class="container">
+      <h2 class="mb-1">Customer Dashboard</h2>
+      <p class="text-muted small mb-0">Manage your sartorial profile, addresses, and delivery preferences.</p>
+    </div>
+  </div>
+
+  <main class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        
+        <!-- Left Column: Navigation Sidebar -->
+        <div class="col-lg-4">
+          <div class="account-nav-card">
+            <div class="account-user-brief">
+              <div class="account-avatar" id="accountAvatarLetter">U</div>
+              <h5 class="mb-0 text-white" id="accountUserName">User Name</h5>
+              <div class="small text-secondary" id="accountUserEmail">user@example.com</div>
+            </div>
+            <ul class="account-nav-list">
+              <li><a href="my-account.html" class="active"><i class="bi bi-person"></i> My Profile &amp; Addresses</a></li>
+              <li><a href="my-orders.html"><i class="bi bi-box-seam"></i> My Orders &amp; Tracking</a></li>
+              <li><a href="wishlist.html"><i class="bi bi-heart"></i> Saved Wishlist</a></li>
+              <li><a href="#" id="btnLogout"><i class="bi bi-box-arrow-right text-danger"></i> Sign Out</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Right Column: Profile & Addresses -->
+        <div class="col-lg-8">
+          
+          <!-- Profile Card -->
+          <div class="account-content-card mb-4">
+            <h5 class="fw-bold mb-3 border-bottom pb-2">Personal Details</h5>
+            <form id="profileUpdateForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-uppercase">Full Name</label>
+                  <input type="text" class="form-control" id="profileName" required>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-uppercase">Email Address (Read-only)</label>
+                  <input type="email" class="form-control bg-light" id="profileEmail" readonly>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label small fw-bold text-uppercase">Mobile Number</label>
+                  <input type="tel" class="form-control" id="profilePhone" required maxlength="10">
+                </div>
+                <div class="col-12 mt-3">
+                  <button type="submit" class="btn btn-luxury-primary btn-sm px-4">Save Changes</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Saved Addresses Card -->
+          <div class="account-content-card mb-4">
+            <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+              <h5 class="fw-bold mb-0">Saved Addresses</h5>
+              <button class="btn btn-luxury-outline btn-sm" data-bs-toggle="modal" data-bs-target="#addAddressModal">
+                <i class="bi bi-plus-lg"></i> Add Address
+              </button>
+            </div>
+
+            <div class="row g-3" id="accountAddressesGrid">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Recent Orders Preview -->
+          <div class="account-content-card">
+            <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+              <h5 class="fw-bold mb-0">Recent Orders</h5>
+              <a href="my-orders.html" class="small text-accent fw-bold">View All Orders &rarr;</a>
+            </div>
+            <div id="accountRecentOrders">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Add Address Modal -->
+  <div class="modal fade" id="addAddressModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0">
+        <div class="modal-header border-bottom">
+          <h5 class="modal-title font-serif">Add New Shipping Address</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form id="newAddressForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-uppercase">Full Name</label>
+                <input type="text" class="form-control form-control-sm" id="newAddrName" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-uppercase">Mobile</label>
+                <input type="tel" class="form-control form-control-sm" id="newAddrPhone" maxlength="10" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label small fw-bold text-uppercase">Address</label>
+                <input type="text" class="form-control form-control-sm" id="newAddrLine" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-uppercase">City</label>
+                <input type="text" class="form-control form-control-sm" id="newAddrCity" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-uppercase">PIN Code</label>
+                <input type="text" class="form-control form-control-sm" id="newAddrPin" maxlength="6" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-uppercase">State</label>
+                <input type="text" class="form-control form-control-sm" id="newAddrState" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold text-uppercase">Type</label>
+                <select class="form-select form-select-sm" id="newAddrType">
+                  <option value="Home">Home</option>
+                  <option value="Work">Work</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="col-12 mt-3">
+                <button type="submit" class="btn btn-luxury-gold w-100 btn-sm py-2">Save Address</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Master Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-bottom d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div>&copy; 2026 Usman Mens Wear Private Limited. All rights reserved.</div>
+        <div><a href="admin/index.html" class="text-secondary small">Admin Portal</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/wishlist.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/checkout.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = AuthManager.requireAuth();
+      if (!user) return;
+
+      // Populate User Data
+      document.getElementById('accountAvatarLetter').textContent = (user.name || 'U').charAt(0).toUpperCase();
+      document.getElementById('accountUserName').textContent = user.name;
+      document.getElementById('accountUserEmail').textContent = user.email;
+      document.getElementById('profileName').value = user.name;
+      document.getElementById('profileEmail').value = user.email;
+      document.getElementById('profilePhone').value = user.phone;
+
+      // Render Addresses
+      renderAddresses(user.addresses || []);
+
+      // Render Recent Orders
+      const userOrders = OrderStore.getUserOrders(user.id).slice(0, 3);
+      const ordersBox = document.getElementById('accountRecentOrders');
+      if (userOrders.length === 0) {
+        ordersBox.innerHTML = '<p class="text-muted small mb-0">No orders placed yet.</p>';
+      } else {
+        ordersBox.innerHTML = userOrders.map(o => `
+          <div class="d-flex justify-content-between align-items-center p-3 border rounded mb-2 bg-light">
+            <div>
+              <strong class="d-block text-dark">${o.orderId}</strong>
+              <small class="text-muted">${new Date(o.createdAt).toLocaleDateString()} &bull; ${o.items?.length} items</small>
+            </div>
+            <div class="text-end">
+              <span class="badge bg-dark mb-1 d-block">${o.orderStatus}</span>
+              <a href="order-details.html?id=${o.orderId}" class="small text-accent fw-bold">View Order &rarr;</a>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Profile form update
+      document.getElementById('profileUpdateForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('profileName').value;
+        const phone = document.getElementById('profilePhone').value;
+        if (AuthManager.updateProfile(name, phone)) {
+          showToast("Profile updated successfully!", "success");
+          document.getElementById('accountUserName').textContent = name;
+        }
+      });
+
+      // New Address Form
+      document.getElementById('newAddressForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const addrData = {
+          name: document.getElementById('newAddrName').value.trim(),
+          phone: document.getElementById('newAddrPhone').value.trim(),
+          addressLine: document.getElementById('newAddrLine').value.trim(),
+          city: document.getElementById('newAddrCity').value.trim(),
+          pincode: document.getElementById('newAddrPin').value.trim(),
+          state: document.getElementById('newAddrState').value.trim(),
+          type: document.getElementById('newAddrType').value
+        };
+
+        const added = AuthManager.addAddress(addrData);
+        if (added) {
+          showToast("Address saved!", "success");
+          const updatedUser = AuthManager.getCurrentUser();
+          renderAddresses(updatedUser.addresses);
+          const modalEl = document.getElementById('addAddressModal');
+          const modal = bootstrap.Modal.getInstance(modalEl);
+          if (modal) modal.hide();
+          document.getElementById('newAddressForm').reset();
+        }
+      });
+
+      // Logout
+      document.getElementById('btnLogout').addEventListener('click', (e) => {
+        e.preventDefault();
+        AuthManager.logout();
+      });
+    });
+
+    function renderAddresses(addresses) {
+      const container = document.getElementById('accountAddressesGrid');
+      if (!addresses || addresses.length === 0) {
+        container.innerHTML = '<div class="col-12 text-muted small">No saved addresses found.</div>';
+        return;
+      }
+
+      container.innerHTML = addresses.map(addr => `
+        <div class="col-md-6">
+          <div class="card p-3 h-100 border position-relative">
+            <div class="d-flex justify-content-between mb-1">
+              <strong>${addr.type} Address</strong>
+              ${addr.isDefault ? '<span class="badge bg-dark">Default</span>' : ''}
+            </div>
+            <div class="small fw-bold text-dark">${addr.name} - ${addr.phone}</div>
+            <div class="small text-muted mb-3">${addr.addressLine}, ${addr.city}, ${addr.state} - ${addr.pincode}</div>
+            <div class="mt-auto">
+              <button class="btn btn-sm btn-outline-danger py-0 px-2 btn-del-addr" data-id="${addr.id}">Delete</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      container.querySelectorAll('.btn-del-addr').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          if (confirm("Delete this address?")) {
+            AuthManager.deleteAddress(id);
+            const user = AuthManager.getCurrentUser();
+            renderAddresses(user.addresses);
+            showToast("Address deleted.", "gold");
+          }
+        });
+      });
+    }
+  </script>
+</body>
+</html>
+

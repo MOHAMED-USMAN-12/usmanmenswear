@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Details | Usman Mens Wear</title>
+  <meta name="description" content="View comprehensive tracking progress and itemized receipt for your order.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👔</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body class="bg-light">
+
+  <!-- Header -->
+  <header class="main-header">
+    <nav class="navbar navbar-expand-lg navbar-light py-2">
+      <div class="container">
+        <a class="navbar-brand navbar-brand-logo me-4" href="index.html">
+          <div>
+            USMAN <span class="brand-gold">MENS WEAR</span>
+            <span class="brand-subtitle">HAUTE SARTORIAL</span>
+          </div>
+        </a>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+            <li class="nav-item"><a class="nav-link" href="my-orders.html">All Orders</a></li>
+          </ul>
+        </div>
+
+        <div class="header-actions">
+          <a href="my-account.html" class="action-icon-btn" title="My Account"><i class="bi bi-person"></i></a>
+          <a href="cart.html" class="action-icon-btn" title="Shopping Bag"><i class="bi bi-bag"></i></a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Title / Breadcrumb -->
+  <div class="bg-white border-bottom py-3">
+    <div class="container d-flex justify-content-between align-items-center flex-wrap gap-2">
+      <div>
+        <a href="my-orders.html" class="small text-muted me-2">&larr; Back to Orders</a>
+        <h3 class="mb-0 mt-1" id="orderHeaderTitle">Order #...</h3>
+      </div>
+      <div>
+        <button class="btn btn-outline-dark btn-sm" onclick="window.print()">
+          <i class="bi bi-printer me-1"></i> Print Invoice
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main class="py-5" id="orderDetailsContainer">
+    <div class="container">
+      <div class="row g-4">
+        
+        <!-- Tracking Timeline Card -->
+        <div class="col-12">
+          <div class="card p-4 border shadow-sm">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 border-bottom pb-3">
+              <div>
+                <span class="text-muted small text-uppercase">Tracking Number:</span>
+                <strong class="text-dark d-block" id="trackingNumberDisplay">BLUEDART-EXP-940218</strong>
+              </div>
+              <div>
+                <span class="text-muted small text-uppercase">Carrier:</span>
+                <strong class="text-dark d-block">Bluedart Priority Express</strong>
+              </div>
+              <div>
+                <span class="text-muted small text-uppercase">Current Status:</span>
+                <span class="badge bg-dark py-2 px-3 text-uppercase" id="orderStatusBadge">Processing</span>
+              </div>
+            </div>
+
+            <!-- Progression Steps -->
+            <div class="order-tracking-bar" id="trackingProgression">
+              <div class="order-tracking-step completed" id="step1">
+                <div class="step-bullet"><i class="bi bi-check-lg"></i></div>
+                <div class="step-label">Order Placed</div>
+              </div>
+              <div class="order-tracking-step" id="step2">
+                <div class="step-bullet">2</div>
+                <div class="step-label">Packed &amp; QC</div>
+              </div>
+              <div class="order-tracking-step" id="step3">
+                <div class="step-bullet">3</div>
+                <div class="step-label">Shipped</div>
+              </div>
+              <div class="order-tracking-step" id="step4">
+                <div class="step-bullet">4</div>
+                <div class="step-label">Delivered</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Left Column: Items purchased -->
+        <div class="col-lg-8">
+          <div class="card p-4 border shadow-sm mb-4">
+            <h5 class="fw-bold mb-3 border-bottom pb-2">Purchased Items</h5>
+            <div id="orderItemsList">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Cancellation or Return Actions -->
+          <div class="card p-3 border shadow-sm d-flex justify-content-between align-items-center flex-row flex-wrap gap-2">
+            <div>
+              <strong class="d-block small text-dark">Need assistance with this order?</strong>
+              <small class="text-muted">You can request cancellation before shipment or initiate a size exchange within 7 days.</small>
+            </div>
+            <div>
+              <button class="btn btn-outline-danger btn-sm" id="btnCancelOrder">Cancel Order</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Shipping & Payment Summary -->
+        <div class="col-lg-4">
+          <!-- Shipping Address -->
+          <div class="card p-4 border shadow-sm mb-4">
+            <h6 class="fw-bold text-uppercase small text-muted mb-2">Delivery Address</h6>
+            <div id="orderShippingAddress">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Payment Info -->
+          <div class="card p-4 border shadow-sm mb-4">
+            <h6 class="fw-bold text-uppercase small text-muted mb-2">Payment Details</h6>
+            <div class="d-flex justify-content-between mb-1 small">
+              <span>Payment Mode:</span>
+              <strong id="orderPaymentMode">UPI</strong>
+            </div>
+            <div class="d-flex justify-content-between small">
+              <span>Payment Status:</span>
+              <span class="badge bg-success" id="orderPaymentStatus">Paid</span>
+            </div>
+          </div>
+
+          <!-- Price Calculations Breakdown -->
+          <div class="card p-4 border shadow-sm">
+            <h6 class="fw-bold text-uppercase small text-muted mb-3 border-bottom pb-2">Financial Breakdown</h6>
+            <div class="summary-row small">
+              <span>Subtotal:</span>
+              <span id="orderSubtotal">₹0</span>
+            </div>
+            <div class="summary-row small text-success" id="orderDiscountRow">
+              <span>Coupon Discount:</span>
+              <span id="orderDiscount">- ₹0</span>
+            </div>
+            <div class="summary-row small">
+              <span>Delivery Fee:</span>
+              <span id="orderShipping">FREE</span>
+            </div>
+            <div class="summary-row total pt-2 mt-2 border-top">
+              <span>Total Paid:</span>
+              <span id="orderTotal">₹0</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Master Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-bottom d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div>&copy; 2026 Usman Mens Wear Private Limited. All rights reserved.</div>
+        <div><a href="admin/index.html" class="text-secondary small">Admin Portal</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/wishlist.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/checkout.js"></script>
+
+  <script>
+    let currentOrder = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const orderId = params.get('id');
+
+      if (!orderId) {
+        window.location.href = 'my-orders.html';
+        return;
+      }
+
+      currentOrder = OrderStore.getById(orderId);
+      if (!currentOrder) {
+        alert("Order not found.");
+        window.location.href = 'my-orders.html';
+        return;
+      }
+
+      renderOrderDetails();
+
+      // Cancel order button
+      document.getElementById('btnCancelOrder').addEventListener('click', () => {
+        if (currentOrder.orderStatus === 'Shipped' || currentOrder.orderStatus === 'Delivered') {
+          showToast("Order is already in transit. Please use our 7-Day Doorstep Return after delivery.", "danger");
+          return;
+        }
+
+        if (confirm("Are you sure you want to cancel this order?")) {
+          OrderStore.updateStatus(currentOrder.orderId, 'Cancelled');
+          showToast("Order has been cancelled.", "gold");
+          currentOrder.orderStatus = 'Cancelled';
+          renderOrderDetails();
+        }
+      });
+    });
+
+    function renderOrderDetails() {
+      const o = currentOrder;
+      document.title = `Order #${o.orderId} | Usman Mens Wear`;
+
+      document.getElementById('orderHeaderTitle').textContent = `Order #${o.orderId}`;
+      document.getElementById('trackingNumberDisplay').textContent = o.trackingId || 'Generated on dispatch';
+      document.getElementById('orderStatusBadge').textContent = o.orderStatus;
+
+      // Update Progression bar
+      updateProgressionSteps(o.orderStatus);
+
+      // Render Items
+      const itemsContainer = document.getElementById('orderItemsList');
+      itemsContainer.innerHTML = o.items.map(item => `
+        <div class="d-flex align-items-center gap-3 py-3 border-bottom">
+          <img src="${item.image}" alt="${item.name}" style="width: 65px; height: 82px; object-fit: cover; border-radius: 4px;">
+          <div class="flex-grow-1">
+            <h6 class="mb-1"><a href="product-details.html?id=${item.productId}">${item.name}</a></h6>
+            <div class="small text-muted">Size: <strong>${item.size}</strong> | Color: <strong>${item.color}</strong></div>
+            <div class="small text-muted">Quantity: ${item.quantity} &times; ${formatCurrency(item.price)}</div>
+          </div>
+          <div class="fw-bold text-dark fs-6">${formatCurrency(item.price * item.quantity)}</div>
+        </div>
+      `).join('');
+
+      // Address
+      const addr = o.shippingAddress;
+      document.getElementById('orderShippingAddress').innerHTML = `
+        <div class="fw-bold text-dark">${addr.name}</div>
+        <div class="small text-muted">${addr.phone}</div>
+        <div class="small text-muted mt-1">${addr.addressLine}${addr.landmark ? ', ' + addr.landmark : ''}</div>
+        <div class="small text-muted">${addr.city}, ${addr.state} - ${addr.pincode}</div>
+      `;
+
+      // Payment
+      document.getElementById('orderPaymentMode').textContent = o.paymentMethod;
+      document.getElementById('orderPaymentStatus').textContent = o.paymentStatus;
+
+      // Calculations
+      document.getElementById('orderSubtotal').textContent = formatCurrency(o.calculations?.subtotal || 0);
+      if (o.calculations?.discount > 0) {
+        document.getElementById('orderDiscountRow').style.display = 'flex';
+        document.getElementById('orderDiscount').textContent = `- ${formatCurrency(o.calculations.discount)}`;
+      } else {
+        document.getElementById('orderDiscountRow').style.display = 'none';
+      }
+
+      document.getElementById('orderShipping').textContent = (o.calculations?.shipping === 0) ? 'FREE' : formatCurrency(o.calculations.shipping);
+      document.getElementById('orderTotal').textContent = formatCurrency(o.calculations?.total || 0);
+    }
+
+    function updateProgressionSteps(status) {
+      const s1 = document.getElementById('step1');
+      const s2 = document.getElementById('step2');
+      const s3 = document.getElementById('step3');
+      const s4 = document.getElementById('step4');
+
+      [s1, s2, s3, s4].forEach(s => s.className = 'order-tracking-step');
+
+      if (status === 'Cancelled') {
+        s1.classList.add('completed');
+        s2.classList.add('active');
+        s2.querySelector('.step-label').textContent = 'Order Cancelled';
+        s2.querySelector('.step-bullet').innerHTML = '<i class="bi bi-x-lg text-danger"></i>';
+        return;
+      }
+
+      s1.classList.add('completed');
+      s1.querySelector('.step-bullet').innerHTML = '<i class="bi bi-check-lg"></i>';
+
+      if (status === 'Confirmed' || status === 'Processing') {
+        s2.classList.add('active');
+      } else if (status === 'Shipped') {
+        s2.classList.add('completed');
+        s2.querySelector('.step-bullet').innerHTML = '<i class="bi bi-check-lg"></i>';
+        s3.classList.add('active');
+      } else if (status === 'Delivered') {
+        s2.classList.add('completed');
+        s2.querySelector('.step-bullet').innerHTML = '<i class="bi bi-check-lg"></i>';
+        s3.classList.add('completed');
+        s3.querySelector('.step-bullet').innerHTML = '<i class="bi bi-check-lg"></i>';
+        s4.classList.add('completed');
+        s4.querySelector('.step-bullet').innerHTML = '<i class="bi bi-check-lg"></i>';
+      }
+    }
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders | Usman Mens Wear</title>
+  <meta name="description" content="View your order history, delivery progression, and order invoices.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👔</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar text-center">
+    <div class="container">
+      <span>FREE DELIVERY ACROSS INDIA ON ORDERS OVER ₹1,499 &bull; COUPON: <strong class="text-accent">WELCOME10</strong></span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header">
+    <nav class="navbar navbar-expand-lg navbar-light py-2">
+      <div class="container">
+        <a class="navbar-brand navbar-brand-logo me-4" href="index.html">
+          <div>
+            USMAN <span class="brand-gold">MENS WEAR</span>
+            <span class="brand-subtitle">HAUTE SARTORIAL</span>
+          </div>
+        </a>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="shop.html">Shop All</a></li>
+            <li class="nav-item"><a class="nav-link active" href="my-orders.html">My Orders</a></li>
+          </ul>
+        </div>
+
+        <div class="header-actions">
+          <a href="my-account.html" class="action-icon-btn" title="My Account"><i class="bi bi-person"></i></a>
+          <a href="wishlist.html" class="action-icon-btn" title="Wishlist">
+            <i class="bi bi-heart"></i>
+            <span class="action-badge header-wishlist-count" style="display: none;">0</span>
+          </a>
+          <a href="cart.html" class="action-icon-btn" title="Shopping Bag">
+            <i class="bi bi-bag"></i>
+            <span class="action-badge header-cart-count" style="display: none;">0</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Title Banner -->
+  <div class="bg-white border-bottom py-4">
+    <div class="container">
+      <h2 class="mb-1">Order History &amp; Tracking</h2>
+      <p class="text-muted small mb-0">Review all your previous sartorial acquisitions, track active deliveries, and manage returns.</p>
+    </div>
+  </div>
+
+  <main class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        
+        <!-- Left Sidebar Navigation -->
+        <div class="col-lg-3">
+          <div class="account-nav-card">
+            <ul class="account-nav-list">
+              <li><a href="my-account.html"><i class="bi bi-person"></i> Profile &amp; Addresses</a></li>
+              <li><a href="my-orders.html" class="active"><i class="bi bi-box-seam"></i> My Orders</a></li>
+              <li><a href="wishlist.html"><i class="bi bi-heart"></i> Saved Wishlist</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Orders List Column -->
+        <div class="col-lg-9">
+          <!-- Status Filter Tabs -->
+          <div class="d-flex gap-2 mb-4 border-bottom pb-2">
+            <button class="btn btn-sm btn-dark order-tab-btn" data-status="all">All Orders</button>
+            <button class="btn btn-sm btn-outline-secondary order-tab-btn" data-status="active">In Transit</button>
+            <button class="btn btn-sm btn-outline-secondary order-tab-btn" data-status="Delivered">Delivered</button>
+            <button class="btn btn-sm btn-outline-secondary order-tab-btn" data-status="Cancelled">Cancelled</button>
+          </div>
+
+          <div id="ordersListContainer">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Master Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-bottom d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div>&copy; 2026 Usman Mens Wear Private Limited. All rights reserved.</div>
+        <div><a href="admin/index.html" class="text-secondary small">Admin Portal</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/wishlist.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/checkout.js"></script>
+
+  <script>
+    let currentFilter = 'all';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = AuthManager.requireAuth();
+      if (!user) return;
+
+      renderOrdersList(user.id);
+
+      // Tabs click
+      document.querySelectorAll('.order-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.order-tab-btn').forEach(b => {
+            b.classList.remove('btn-dark');
+            b.classList.add('btn-outline-secondary');
+          });
+          btn.classList.add('btn-dark');
+          btn.classList.remove('btn-outline-secondary');
+
+          currentFilter = btn.getAttribute('data-status');
+          renderOrdersList(user.id);
+        });
+      });
+    });
+
+    function renderOrdersList(userId) {
+      let orders = OrderStore.getUserOrders(userId);
+      const container = document.getElementById('ordersListContainer');
+
+      if (currentFilter === 'active') {
+        orders = orders.filter(o => o.orderStatus === 'Confirmed' || o.orderStatus === 'Shipped' || o.orderStatus === 'Processing');
+      } else if (currentFilter !== 'all') {
+        orders = orders.filter(o => o.orderStatus === currentFilter);
+      }
+
+      if (orders.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state-box">
+            <i class="bi bi-box-seam empty-state-icon"></i>
+            <h4>No Orders Found</h4>
+            <p class="text-muted small mb-3">You do not have any orders matching this status.</p>
+            <a href="shop.html" class="btn btn-luxury-primary">Shop Collection</a>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = orders.map(order => `
+        <div class="card mb-4 border overflow-hidden">
+          <div class="card-header bg-light py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+              <span class="text-muted small text-uppercase">ORDER PLACED:</span>
+              <div class="fw-bold text-dark small">${new Date(order.createdAt).toLocaleDateString('en-IN', { month: 'short', day: 'numeric', year: 'numeric' })}</div>
+            </div>
+            <div>
+              <span class="text-muted small text-uppercase">TOTAL AMOUNT:</span>
+              <div class="fw-bold text-dark small">${formatCurrency(order.calculations?.total || 0)}</div>
+            </div>
+            <div>
+              <span class="text-muted small text-uppercase">SHIP TO:</span>
+              <div class="fw-bold text-dark small">${order.shippingAddress?.name || 'Customer'}</div>
+            </div>
+            <div class="text-end">
+              <span class="text-muted small text-uppercase">ORDER #${order.orderId}</span>
+              <div>
+                <a href="order-details.html?id=${order.orderId}" class="small text-accent fw-bold text-decoration-underline">View Details</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div>
+                <span class="badge ${order.orderStatus === 'Delivered' ? 'bg-success' : order.orderStatus === 'Cancelled' ? 'bg-danger' : 'bg-dark'} px-3 py-2 text-uppercase">
+                  ${order.orderStatus}
+                </span>
+                <span class="ms-2 small text-muted">
+                  ${order.orderStatus === 'Delivered' ? 'Delivered on ' + (order.deliveredAt ? new Date(order.deliveredAt).toLocaleDateString() : 'recent') : 'Expected delivery: ' + (order.estimatedDelivery || 'In 3-4 days')}
+                </span>
+              </div>
+              <a href="order-details.html?id=${order.orderId}" class="btn btn-luxury-outline btn-sm">
+                <i class="bi bi-truck me-1"></i> Track Package
+              </a>
+            </div>
+
+            <!-- Items -->
+            ${order.items.map(item => `
+              <div class="d-flex align-items-center gap-3 py-2 border-top">
+                <img src="${item.image}" alt="${item.name}" style="width: 55px; height: 68px; object-fit: cover; border-radius: 3px;">
+                <div class="flex-grow-1">
+                  <h6 class="mb-1"><a href="product-details.html?id=${item.productId}">${item.name}</a></h6>
+                  <div class="small text-muted">Qty: ${item.quantity} | Size: ${item.size} | Color: ${item.color}</div>
+                </div>
+                <div class="fw-bold text-dark">${formatCurrency(item.price * item.quantity)}</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>
+

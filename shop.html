@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop All Collections | Usman Mens Wear</title>
+  <meta name="description" content="Explore our full collection of formal shirts, linen casuals, Supima polos, selvedge denim, tailored trousers, and accessories.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👔</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar text-center">
+    <div class="container">
+      <span>COMPLIMENTARY SHIPPING ACROSS INDIA ON ORDERS OVER ₹1,499 &bull; CODE: <span class="accent-text">WELCOME10</span></span>
+    </div>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <nav class="navbar navbar-expand-lg navbar-light py-2">
+      <div class="container">
+        <button class="navbar-toggler border-0 shadow-none px-0 me-2" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+          <i class="bi bi-list fs-2 text-dark"></i>
+        </button>
+
+        <a class="navbar-brand navbar-brand-logo me-4" href="index.html">
+          <div>
+            USMAN <span class="brand-gold">MENS WEAR</span>
+            <span class="brand-subtitle">HAUTE SARTORIAL &bull; EST. 2026</span>
+          </div>
+        </a>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link active" href="shop.html">Shop All</a></li>
+            <li class="nav-item"><a class="nav-link" href="shop.html?category=formal-shirts">Shirts</a></li>
+            <li class="nav-item"><a class="nav-link" href="shop.html?category=polo-tshirts">T-Shirts</a></li>
+            <li class="nav-item"><a class="nav-link" href="shop.html?category=jeans">Jeans</a></li>
+            <li class="nav-item"><a class="nav-link" href="shop.html?category=formal-trousers">Trousers</a></li>
+            <li class="nav-item"><a class="nav-link" href="shop.html?category=accessories">Accessories</a></li>
+          </ul>
+        </div>
+
+        <div class="header-actions">
+          <div class="search-container d-none d-md-block">
+            <div class="search-input-group">
+              <i class="bi bi-search search-icon"></i>
+              <input type="text" class="site-search-input" placeholder="Search collection..." autocomplete="off">
+            </div>
+          </div>
+          <a href="my-account.html" class="action-icon-btn" title="My Account"><i class="bi bi-person"></i></a>
+          <a href="wishlist.html" class="action-icon-btn" title="Wishlist">
+            <i class="bi bi-heart"></i>
+            <span class="action-badge header-wishlist-count" style="display: none;">0</span>
+          </a>
+          <a href="cart.html" class="action-icon-btn" title="Shopping Bag">
+            <i class="bi bi-bag"></i>
+            <span class="action-badge header-cart-count" style="display: none;">0</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Breadcrumb & Page Banner -->
+  <div class="bg-white border-bottom py-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0 small">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page" id="breadcrumbCurrent">Catalog</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Main Shop Container -->
+  <main class="py-4">
+    <div class="container">
+      <div class="row g-4">
+        
+        <!-- Filter Sidebar -->
+        <aside class="col-lg-3">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold mb-0 text-uppercase small letter-spacing-1">Filters</h5>
+            <button class="btn btn-sm text-danger p-0" id="btnClearAllFilters" style="font-size: 0.8rem;">
+              <i class="bi bi-arrow-counterclockwise"></i> Reset All
+            </button>
+          </div>
+
+          <!-- Active Filter Tags -->
+          <div class="active-filters-container" id="activeFilterTags"></div>
+
+          <!-- Category Filter -->
+          <div class="filter-card">
+            <div class="filter-title">Category</div>
+            <ul class="filter-group-list">
+              <li>
+                <label class="filter-checkbox-label">
+                  <span><input type="radio" name="categoryFilter" value="all" checked> All Categories</span>
+                  <span class="count" id="countAll">31</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <span><input type="radio" name="categoryFilter" value="formal-shirts"> Formal Shirts</span>
+                  <span class="count" id="countFormalShirts">5</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <span><input type="radio" name="categoryFilter" value="casual-shirts"> Casual Shirts</span>
+                  <span class="count" id="countCasualShirts">5</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <span><input type="radio" name="categoryFilter" value="polo-tshirts"> Polo T-Shirts</span>
+                  <span class="count" id="countPoloTshirts">4</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <span><input type="radio" name="categoryFilter" value="printed-tshirts"> Printed T-Shirts</span>
+                  <span class="count" id="countPrintedTshirts">4</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <span><input type="radio" name="categoryFilter" value="jeans"> Jeans & Denim</span>
+                  <span class="count" id="countJeans">5</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <span><input type="radio" name="categoryFilter" value="formal-trousers"> Formal Trousers</span>
+                  <span class="count" id="countFormalTrousers">4</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <span><input type="radio" name="categoryFilter" value="trousers"> Casual Trousers & Chinos</span>
+                  <span class="count" id="countCasualTrousers">3</span>
+                </label>
+              </li>
+              <li>
+                <label class="filter-checkbox-label">
+                  <span><input type="radio" name="categoryFilter" value="accessories"> Accessories</span>
+                  <span class="count" id="countAccessories">6</span>
+                </label>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Price Range Filter -->
+          <div class="filter-card">
+            <div class="filter-title">Price Range</div>
+            <div class="mb-2">
+              <input type="range" class="form-range" id="priceRangeSlider" min="800" max="4500" step="100" value="4500">
+            </div>
+            <div class="d-flex justify-content-between small text-muted">
+              <span>₹800</span>
+              <span class="fw-bold text-dark" id="priceRangeDisplay">Up to ₹4,500</span>
+            </div>
+          </div>
+
+          <!-- Size Filter -->
+          <div class="filter-card">
+            <div class="filter-title">Size</div>
+            <div class="size-filter-list" id="sizeFilterList">
+              <button class="size-filter-btn" data-size="S">S</button>
+              <button class="size-filter-btn" data-size="M">M</button>
+              <button class="size-filter-btn" data-size="L">L</button>
+              <button class="size-filter-btn" data-size="XL">XL</button>
+              <button class="size-filter-btn" data-size="XXL">XXL</button>
+              <button class="size-filter-btn" data-size="30">30</button>
+              <button class="size-filter-btn" data-size="32">32</button>
+              <button class="size-filter-btn" data-size="34">34</button>
+              <button class="size-filter-btn" data-size="36">36</button>
+              <button class="size-filter-btn" data-size="38">38</button>
+            </div>
+          </div>
+
+          <!-- Availability Filter -->
+          <div class="filter-card">
+            <div class="filter-title">Availability</div>
+            <label class="filter-checkbox-label">
+              <span><input type="checkbox" id="filterInStockOnly"> In Stock Only</span>
+            </label>
+          </div>
+        </aside>
+
+        <!-- Product Listing Grid Area -->
+        <section class="col-lg-9">
+          <!-- Top Sorting & Count Controls -->
+          <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3 bg-white p-3 border rounded">
+            <div>
+              <span class="text-muted small">Showing <strong class="text-dark" id="resultsCount">0</strong> products</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <label for="sortDropdown" class="small text-muted mb-0 text-nowrap">Sort By:</label>
+              <select id="sortDropdown" class="form-select form-select-sm" style="width: 190px;">
+                <option value="popularity">Popularity</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="newest">Newest Arrivals</option>
+                <option value="discount">Highest Discount</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Product Grid -->
+          <div class="row g-4" id="shopProductGrid">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <!-- Empty State (Hidden by default) -->
+          <div class="empty-state-box mt-4 d-none" id="shopEmptyState">
+            <i class="bi bi-funnel empty-state-icon"></i>
+            <h4 class="mb-2">No Matching Products Found</h4>
+            <p class="text-muted mb-3">Try adjusting your filters, price range, or searching for other items.</p>
+            <button class="btn btn-luxury-primary" id="btnEmptyReset">Reset All Filters</button>
+          </div>
+
+          <!-- Pagination -->
+          <nav class="mt-5 d-flex justify-content-center" id="shopPaginationNav">
+            <ul class="pagination pagination-sm" id="shopPaginationList">
+              <!-- Rendered dynamically -->
+            </ul>
+          </nav>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Master Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-brand">USMAN <span>MENS WEAR</span></div>
+          <p class="footer-desc">Redefining contemporary Indian men's luxury dressing. Crafted with natural textiles, time-honoured tailoring, and modern versatility.</p>
+          <div class="text-white small mb-2"><i class="bi bi-geo-alt-fill text-accent me-2"></i> Indiranagar, Bengaluru - 560038</div>
+          <div class="text-white small"><i class="bi bi-envelope-fill text-accent me-2"></i> concierge@usmanwear.com</div>
+        </div>
+        <div class="col-lg-2 col-6">
+          <h6 class="footer-heading">Collections</h6>
+          <ul class="footer-links">
+            <li><a href="shop.html?category=formal-shirts">Formal Shirts</a></li>
+            <li><a href="shop.html?category=casual-shirts">Casual Linen</a></li>
+            <li><a href="shop.html?category=jeans">Selvedge Jeans</a></li>
+            <li><a href="shop.html?category=formal-trousers">Trousers</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-6">
+          <h6 class="footer-heading">Customer Care</h6>
+          <ul class="footer-links">
+            <li><a href="my-account.html">My Account</a></li>
+            <li><a href="my-orders.html">Track Order</a></li>
+            <li><a href="cart.html">Shopping Bag</a></li>
+            <li><a href="return-policy.html">Returns Policy</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h6 class="footer-heading">Join The VIP Club</h6>
+          <p class="small text-muted mb-3">Receive private runway releases and seasonal offers.</p>
+          <form class="newsletter-form">
+            <div class="newsletter-input-group">
+              <input type="email" placeholder="Your email address..." required>
+              <button type="submit">Join</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div>&copy; 2026 Usman Mens Wear Private Limited. All rights reserved.</div>
+        <div><a href="admin/index.html" class="text-secondary small"><i class="bi bi-shield-lock"></i> Admin Portal</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/wishlist.js"></script>
+  <script src="assets/js/auth.js"></script>
+
+  <!-- Shop Filter & Grid Controller -->
+  <script>
+    const ShopPage = {
+      currentPage: 1,
+      pageSize: 12,
+      selectedCategory: 'all',
+      selectedSize: null,
+      maxPrice: 4500,
+      inStockOnly: false,
+      sortBy: 'popularity',
+      searchQuery: '',
+      specialFilter: '',
+
+      init() {
+        this.parseUrlParams();
+        this.bindUiEvents();
+        this.render();
+      },
+
+      parseUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('category')) {
+          this.selectedCategory = params.get('category');
+          const radio = document.querySelector(`input[name="categoryFilter"][value="${this.selectedCategory}"]`);
+          if (radio) radio.checked = true;
+        }
+        if (params.get('search')) {
+          this.searchQuery = params.get('search');
+          const searchInput = document.querySelector('.site-search-input');
+          if (searchInput) searchInput.value = this.searchQuery;
+        }
+        if (params.get('filter')) {
+          this.specialFilter = params.get('filter'); // 'new', 'offers'
+        }
+      },
+
+      bindUiEvents() {
+        // Category radios
+        document.querySelectorAll('input[name="categoryFilter"]').forEach(r => {
+          r.addEventListener('change', (e) => {
+            this.selectedCategory = e.target.value;
+            this.currentPage = 1;
+            this.render();
+          });
+        });
+
+        // Price Slider
+        const slider = document.getElementById('priceRangeSlider');
+        const display = document.getElementById('priceRangeDisplay');
+        if (slider) {
+          slider.addEventListener('input', (e) => {
+            this.maxPrice = parseInt(e.target.value, 10);
+            if (display) display.textContent = `Up to ${formatCurrency(this.maxPrice)}`;
+            this.currentPage = 1;
+            this.render();
+          });
+        }
+
+        // Size Buttons
+        document.querySelectorAll('.size-filter-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const size = btn.getAttribute('data-size');
+            if (this.selectedSize === size) {
+              this.selectedSize = null;
+              btn.classList.remove('active');
+            } else {
+              document.querySelectorAll('.size-filter-btn').forEach(b => b.classList.remove('active'));
+              this.selectedSize = size;
+              btn.classList.add('active');
+            }
+            this.currentPage = 1;
+            this.render();
+          });
+        });
+
+        // In Stock Checkbox
+        const stockCb = document.getElementById('filterInStockOnly');
+        if (stockCb) {
+          stockCb.addEventListener('change', (e) => {
+            this.inStockOnly = e.target.checked;
+            this.currentPage = 1;
+            this.render();
+          });
+        }
+
+        // Sorting
+        const sortSelect = document.getElementById('sortDropdown');
+        if (sortSelect) {
+          sortSelect.addEventListener('change', (e) => {
+            this.sortBy = e.target.value;
+            this.render();
+          });
+        }
+
+        // Reset Buttons
+        const resetBtn = document.getElementById('btnClearAllFilters');
+        if (resetBtn) resetBtn.addEventListener('click', () => this.resetFilters());
+        const emptyResetBtn = document.getElementById('btnEmptyReset');
+        if (emptyResetBtn) emptyResetBtn.addEventListener('click', () => this.resetFilters());
+      },
+
+      resetFilters() {
+        this.selectedCategory = 'all';
+        this.selectedSize = null;
+        this.maxPrice = 4500;
+        this.inStockOnly = false;
+        this.searchQuery = '';
+        this.specialFilter = '';
+        this.currentPage = 1;
+
+        const allRadio = document.querySelector('input[name="categoryFilter"][value="all"]');
+        if (allRadio) allRadio.checked = true;
+
+        document.querySelectorAll('.size-filter-btn').forEach(b => b.classList.remove('active'));
+        
+        const slider = document.getElementById('priceRangeSlider');
+        if (slider) slider.value = 4500;
+        const display = document.getElementById('priceRangeDisplay');
+        if (display) display.textContent = `Up to ₹4,500`;
+
+        const stockCb = document.getElementById('filterInStockOnly');
+        if (stockCb) stockCb.checked = false;
+
+        this.render();
+      },
+
+      getFilteredData() {
+        let products = ProductStore.getAll();
+
+        // Category Filter
+        if (this.selectedCategory !== 'all') {
+          products = products.filter(p => p.category === this.selectedCategory);
+        }
+
+        // Search Query
+        if (this.searchQuery) {
+          const q = this.searchQuery.toLowerCase();
+          products = products.filter(p => 
+            p.name.toLowerCase().includes(q) ||
+            p.brand.toLowerCase().includes(q) ||
+            p.categoryName.toLowerCase().includes(q)
+          );
+        }
+
+        // Special Filters from Hero/Nav
+        if (this.specialFilter === 'new') {
+          products = products.filter(p => p.isNewArrival);
+        } else if (this.specialFilter === 'offers') {
+          products = products.filter(p => p.discount >= 40);
+        }
+
+        // Max Price
+        products = products.filter(p => p.price <= this.maxPrice);
+
+        // Size Filter
+        if (this.selectedSize) {
+          products = products.filter(p => p.sizes && p.sizes.includes(this.selectedSize));
+        }
+
+        // In Stock Only
+        if (this.inStockOnly) {
+          products = products.filter(p => p.stock > 0);
+        }
+
+        // Sorting
+        if (this.sortBy === 'price-asc') {
+          products.sort((a, b) => a.price - b.price);
+        } else if (this.sortBy === 'price-desc') {
+          products.sort((a, b) => b.price - a.price);
+        } else if (this.sortBy === 'newest') {
+          products.sort((a, b) => (b.isNewArrival ? 1 : 0) - (a.isNewArrival ? 1 : 0));
+        } else if (this.sortBy === 'discount') {
+          products.sort((a, b) => (b.discount || 0) - (a.discount || 0));
+        } else {
+          // Popularity
+          products.sort((a, b) => (b.rating * b.reviewCount) - (a.rating * a.reviewCount));
+        }
+
+        return products;
+      },
+
+      render() {
+        const filtered = this.getFilteredData();
+        const totalCount = filtered.length;
+        document.getElementById('resultsCount').textContent = totalCount;
+
+        // Render Active Filter Tags
+        this.renderActiveFilterPills();
+
+        const grid = document.getElementById('shopProductGrid');
+        const emptyState = document.getElementById('shopEmptyState');
+        const paginationNav = document.getElementById('shopPaginationNav');
+
+        if (totalCount === 0) {
+          grid.innerHTML = '';
+          emptyState.classList.remove('d-none');
+          paginationNav.classList.add('d-none');
+          return;
+        }
+
+        emptyState.classList.add('d-none');
+        paginationNav.classList.remove('d-none');
+
+        // Pagination Slice
+        const totalPages = Math.ceil(totalCount / this.pageSize);
+        if (this.currentPage > totalPages) this.currentPage = 1;
+
+        const startIndex = (this.currentPage - 1) * this.pageSize;
+        const pageItems = filtered.slice(startIndex, startIndex + this.pageSize);
+
+        grid.innerHTML = pageItems.map(p => this.renderProductCard(p)).join('');
+        this.renderPagination(totalPages);
+        this.bindCardEvents();
+      },
+
+      renderActiveFilterPills() {
+        const container = document.getElementById('activeFilterTags');
+        if (!container) return;
+
+        let pillsHtml = '';
+        if (this.selectedCategory !== 'all') {
+          pillsHtml += `<span class="filter-tag-pill">Category: ${this.selectedCategory} <i class="bi bi-x" onclick="ShopPage.clearFilter('category')"></i></span>`;
+        }
+        if (this.selectedSize) {
+          pillsHtml += `<span class="filter-tag-pill">Size: ${this.selectedSize} <i class="bi bi-x" onclick="ShopPage.clearFilter('size')"></i></span>`;
+        }
+        if (this.maxPrice < 4500) {
+          pillsHtml += `<span class="filter-tag-pill">Under ${formatCurrency(this.maxPrice)} <i class="bi bi-x" onclick="ShopPage.clearFilter('price')"></i></span>`;
+        }
+        if (this.searchQuery) {
+          pillsHtml += `<span class="filter-tag-pill">Search: "${this.searchQuery}" <i class="bi bi-x" onclick="ShopPage.clearFilter('search')"></i></span>`;
+        }
+
+        container.innerHTML = pillsHtml;
+      },
+
+      clearFilter(type) {
+        if (type === 'category') {
+          this.selectedCategory = 'all';
+          const r = document.querySelector('input[name="categoryFilter"][value="all"]');
+          if (r) r.checked = true;
+        } else if (type === 'size') {
+          this.selectedSize = null;
+          document.querySelectorAll('.size-filter-btn').forEach(b => b.classList.remove('active'));
+        } else if (type === 'price') {
+          this.maxPrice = 4500;
+          document.getElementById('priceRangeSlider').value = 4500;
+          document.getElementById('priceRangeDisplay').textContent = `Up to ₹4,500`;
+        } else if (type === 'search') {
+          this.searchQuery = '';
+          const s = document.querySelector('.site-search-input');
+          if (s) s.value = '';
+        }
+        this.render();
+      },
+
+      renderProductCard(p) {
+        const isWish = WishlistManager.isInWishlist(p.id);
+        return `
+          <div class="col-6 col-md-4 mb-4">
+            <div class="product-card">
+              <div class="product-thumb">
+                <a href="product-details.html?id=${p.id}">
+                  <img src="${p.images[0]}" alt="${p.name}" loading="lazy">
+                </a>
+                <div class="product-badges">
+                  ${p.discount > 0 ? `<span class="tag-badge badge-sale">${p.discount}% OFF</span>` : ''}
+                  ${p.isNewArrival ? `<span class="tag-badge badge-dark">New</span>` : ''}
+                </div>
+                <button class="btn-wishlist ${isWish ? 'active' : ''}" data-id="${p.id}" title="Wishlist">
+                  <i class="bi ${isWish ? 'bi-heart-fill text-danger' : 'bi-heart'}"></i>
+                </button>
+              </div>
+              <div class="product-details-content">
+                <div class="product-category-brand">${p.brand} &bull; ${p.categoryName}</div>
+                <h6 class="product-title">
+                  <a href="product-details.html?id=${p.id}">${p.name}</a>
+                </h6>
+                <div class="product-rating">
+                  <span class="stars"><i class="bi bi-star-fill"></i> ${p.rating}</span>
+                  <span class="count">(${p.reviewCount})</span>
+                </div>
+                <div class="product-price-row">
+                  <span class="current-price">${formatCurrency(p.price)}</span>
+                  ${p.originalPrice ? `<span class="original-price">${formatCurrency(p.originalPrice)}</span>` : ''}
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      },
+
+      renderPagination(totalPages) {
+        const paginationList = document.getElementById('shopPaginationList');
+        if (!paginationList) return;
+
+        let html = '';
+        if (totalPages > 1) {
+          html += `
+            <li class="page-item ${this.currentPage === 1 ? 'disabled' : ''}">
+              <a class="page-link" href="#" data-page="${this.currentPage - 1}">&laquo;</a>
+            </li>
+          `;
+
+          for (let i = 1; i <= totalPages; i++) {
+            html += `
+              <li class="page-item ${this.currentPage === i ? 'active' : ''}">
+                <a class="page-link" href="#" data-page="${i}">${i}</a>
+              </li>
+            `;
+          }
+
+          html += `
+            <li class="page-item ${this.currentPage === totalPages ? 'disabled' : ''}">
+              <a class="page-link" href="#" data-page="${this.currentPage + 1}">&raquo;</a>
+            </li>
+          `;
+        }
+
+        paginationList.innerHTML = html;
+
+        paginationList.querySelectorAll('.page-link').forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const p = parseInt(link.getAttribute('data-page'), 10);
+            if (p >= 1 && p <= totalPages) {
+              this.currentPage = p;
+              this.render();
+              window.scrollTo({ top: 150, behavior: 'smooth' });
+            }
+          });
+        });
+      },
+
+      bindCardEvents() {
+        document.querySelectorAll('.btn-wishlist').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const id = btn.getAttribute('data-id');
+            const isAdded = WishlistManager.toggle(id);
+            btn.classList.toggle('active', isAdded);
+            const icon = btn.querySelector('i');
+            if (icon) {
+              icon.className = `bi ${isAdded ? 'bi-heart-fill text-danger' : 'bi-heart'}`;
+            }
+          });
+        });
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      ShopPage.init();
+    });
+  </script>
+</body>
+</html>
+

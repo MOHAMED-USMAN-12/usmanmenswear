@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add / Edit Product | Usman Mens Wear Admin</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👔</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body">
+
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="admin-sidebar-brand">
+      <i class="bi bi-shield-check text-accent"></i>
+      <div>USMAN <span>ADMIN</span></div>
+    </div>
+    <ul class="admin-nav-menu">
+      <li class="admin-nav-item"><a href="dashboard.html"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+      <li class="admin-nav-item"><a href="products.html"><i class="bi bi-tags"></i> Products</a></li>
+      <li class="admin-nav-item active"><a href="add-product.html"><i class="bi bi-plus-square"></i> Add Product</a></li>
+      <li class="admin-nav-item"><a href="orders.html"><i class="bi bi-box-seam"></i> Orders</a></li>
+      <li class="admin-nav-item"><a href="customers.html"><i class="bi bi-people"></i> Customers</a></li>
+      <li class="admin-nav-item"><a href="inventory.html"><i class="bi bi-archive"></i> Inventory</a></li>
+      <li class="admin-nav-item"><a href="coupons.html"><i class="bi bi-ticket-perforated"></i> Coupons</a></li>
+    </ul>
+    <div class="admin-sidebar-footer">
+      <a href="../index.html" class="text-white small" target="_blank"><i class="bi bi-box-arrow-up-right me-1 text-accent"></i> View Store</a>
+      <a href="#" id="adminLogoutBtn" class="text-danger small"><i class="bi bi-power"></i> Logout</a>
+    </div>
+  </aside>
+
+  <div class="admin-main-wrapper">
+    <header class="admin-top-nav">
+      <button class="btn btn-sm btn-outline-dark d-lg-none" id="btnToggleSidebar"><i class="bi bi-list fs-5"></i></button>
+      <h5 class="mb-0 fw-bold" id="pageTitleHeading">Add New Sartorial Product</h5>
+      <a href="products.html" class="btn btn-outline-secondary btn-sm">&larr; Back to Catalog</a>
+    </header>
+
+    <main class="admin-content">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <h5 id="formTitle">Product Specifications</h5>
+            </div>
+            <div class="p-4">
+              <form id="productForm">
+                <input type="hidden" id="editProductId">
+
+                <div class="row g-3">
+                  <!-- Name & Category -->
+                  <div class="col-md-8">
+                    <label class="form-label small fw-bold text-uppercase">Product Name *</label>
+                    <input type="text" class="form-control" id="formProdName" required placeholder="e.g. Royal Oxford Classic White Formal Shirt">
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label small fw-bold text-uppercase">Category *</label>
+                    <select class="form-select" id="formProdCategory" required>
+                      <option value="formal-shirts">Formal Shirts</option>
+                      <option value="casual-shirts">Casual Shirts</option>
+                      <option value="polo-tshirts">Polo T-Shirts</option>
+                      <option value="printed-tshirts">Printed T-Shirts</option>
+                      <option value="jeans">Jeans & Denim</option>
+                      <option value="formal-trousers">Formal Trousers</option>
+                      <option value="trousers">Casual Trousers</option>
+                      <option value="accessories">Accessories</option>
+                    </select>
+                  </div>
+
+                  <!-- Brand & SKU -->
+                  <div class="col-md-6">
+                    <label class="form-label small fw-bold text-uppercase">Brand / Label *</label>
+                    <input type="text" class="form-control" id="formProdBrand" value="Usman Sartorial" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label small fw-bold text-uppercase">SKU (Stock Keeping Unit) *</label>
+                    <input type="text" class="form-control" id="formProdSku" required placeholder="e.g. UMW-FSH-109">
+                  </div>
+
+                  <!-- Pricing & Stock -->
+                  <div class="col-md-4">
+                    <label class="form-label small fw-bold text-uppercase">Selling Price (₹) *</label>
+                    <input type="number" class="form-control" id="formProdPrice" min="0" required placeholder="1899">
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label small fw-bold text-uppercase">Original Price / MRP (₹)</label>
+                    <input type="number" class="form-control" id="formProdOriginalPrice" min="0" placeholder="3499">
+                  </div>
+                  <div class="col-md-4">
+                    <label class="form-label small fw-bold text-uppercase">Initial Stock (Units) *</label>
+                    <input type="number" class="form-control" id="formProdStock" min="0" required value="25">
+                  </div>
+
+                  <!-- Sizes (Comma separated or presets) -->
+                  <div class="col-md-6">
+                    <label class="form-label small fw-bold text-uppercase">Available Sizes (Comma-separated)</label>
+                    <input type="text" class="form-control" id="formProdSizes" value="S, M, L, XL, XXL">
+                    <small class="text-muted">Use 30, 32, 34, 36 for trousers or S, M, L, XL for tops</small>
+                  </div>
+
+                  <!-- Colors -->
+                  <div class="col-md-6">
+                    <label class="form-label small fw-bold text-uppercase">Color Options (Comma-separated)</label>
+                    <input type="text" class="form-control" id="formProdColors" value="Crisp White, Ice Blue, Navy">
+                  </div>
+
+                  <!-- Image URL & Preview -->
+                  <div class="col-md-8">
+                    <label class="form-label small fw-bold text-uppercase">Primary Image URL *</label>
+                    <input type="url" class="form-control" id="formProdImageUrl" required placeholder="https://images.unsplash.com/photo-..." value="https://images.unsplash.com/photo-1620012253295-c15c429fbb41?auto=format&fit=crop&w=900&q=80">
+                  </div>
+                  <div class="col-md-4 text-center">
+                    <label class="form-label small fw-bold text-uppercase d-block">Image Preview</label>
+                    <img id="imagePreview" src="https://images.unsplash.com/photo-1620012253295-c15c429fbb41?auto=format&fit=crop&w=900&q=80" alt="Preview" style="height: 90px; width: 75px; object-fit: cover; border-radius: 4px; border: 1px solid #ccc;">
+                  </div>
+
+                  <!-- Specifications -->
+                  <div class="col-md-6">
+                    <label class="form-label small fw-bold text-uppercase">Fabric Composition</label>
+                    <input type="text" class="form-control" id="formProdFabric" placeholder="e.g. 100% Giza Egyptian Cotton">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label small fw-bold text-uppercase">Cut & Fit</label>
+                    <input type="text" class="form-control" id="formProdFit" placeholder="e.g. Contemporary Slim Fit">
+                  </div>
+
+                  <!-- Description -->
+                  <div class="col-12">
+                    <label class="form-label small fw-bold text-uppercase">Garment Description *</label>
+                    <textarea class="form-control" id="formProdDesc" rows="4" required placeholder="Describe weave, construction, and styling..."></textarea>
+                  </div>
+
+                  <!-- Flags -->
+                  <div class="col-12">
+                    <label class="form-label small fw-bold text-uppercase d-block mb-2">Merchandising Tags</label>
+                    <div class="d-flex gap-4 flex-wrap">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="checkTrending" checked>
+                        <label class="form-check-label small" for="checkTrending">Trending Section</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="checkNewArrival" checked>
+                        <label class="form-check-label small" for="checkNewArrival">New Arrival Badge</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="checkBestSeller">
+                        <label class="form-check-label small" for="checkBestSeller">Best Seller Badge</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Submit button -->
+                  <div class="col-12 mt-4 pt-3 border-top">
+                    <button type="submit" class="btn btn-luxury-primary px-5 py-2 fw-bold" id="btnSaveProduct">
+                      Save Product to Store
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/products.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/checkout.js"></script>
+  <script src="../assets/js/admin.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const admin = AuthManager.requireAdmin();
+      if (!admin) return;
+
+      // Live image preview
+      document.getElementById('formProdImageUrl').addEventListener('input', function() {
+        document.getElementById('imagePreview').src = this.value || 'https://via.placeholder.com/150';
+      });
+
+      // Check edit mode
+      const params = new URLSearchParams(window.location.search);
+      const editId = params.get('edit');
+
+      if (editId) {
+        const p = ProductStore.getById(editId);
+        if (p) {
+          document.getElementById('pageTitleHeading').textContent = 'Edit Product';
+          document.getElementById('formTitle').textContent = `Editing: ${p.name}`;
+          document.getElementById('editProductId').value = p.id;
+          document.getElementById('formProdName').value = p.name;
+          document.getElementById('formProdCategory').value = p.category;
+          document.getElementById('formProdBrand').value = p.brand;
+          document.getElementById('formProdSku').value = p.sku;
+          document.getElementById('formProdPrice').value = p.price;
+          document.getElementById('formProdOriginalPrice').value = p.originalPrice || '';
+          document.getElementById('formProdStock').value = p.stock;
+          document.getElementById('formProdSizes').value = p.sizes ? p.sizes.join(', ') : '';
+          document.getElementById('formProdColors').value = p.colors ? p.colors.map(c => c.name).join(', ') : '';
+          document.getElementById('formProdImageUrl').value = p.images[0] || '';
+          document.getElementById('imagePreview').src = p.images[0] || '';
+          document.getElementById('formProdFabric').value = p.fabric || '';
+          document.getElementById('formProdFit').value = p.fit || '';
+          document.getElementById('formProdDesc').value = p.description || '';
+          document.getElementById('checkTrending').checked = !!p.isTrending;
+          document.getElementById('checkNewArrival').checked = !!p.isNewArrival;
+          document.getElementById('checkBestSeller').checked = !!p.isBestSeller;
+          document.getElementById('btnSaveProduct').textContent = 'Update Product';
+        }
+      }
+
+      // Handle submit
+      document.getElementById('productForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const id = document.getElementById('editProductId').value || ('prod-' + Date.now().toString(36));
+        const catSelect = document.getElementById('formProdCategory');
+        const catName = catSelect.options[catSelect.selectedIndex].text;
+        const price = parseFloat(document.getElementById('formProdPrice').value);
+        const originalPrice = parseFloat(document.getElementById('formProdOriginalPrice').value) || price;
+        const discount = originalPrice > price ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0;
+
+        const sizes = document.getElementById('formProdSizes').value.split(',').map(s => s.trim()).filter(Boolean);
+        const colorNames = document.getElementById('formProdColors').value.split(',').map(c => c.trim()).filter(Boolean);
+        const colors = colorNames.map(name => ({ name, hex: '#171717' }));
+
+        const productData = {
+          id: id,
+          name: document.getElementById('formProdName').value.trim(),
+          category: catSelect.value,
+          categoryName: catName,
+          brand: document.getElementById('formProdBrand').value.trim(),
+          sku: document.getElementById('formProdSku').value.trim(),
+          price: price,
+          originalPrice: originalPrice,
+          discount: discount,
+          stock: parseInt(document.getElementById('formProdStock').value, 10),
+          sizes: sizes.length ? sizes : ["M", "L", "XL"],
+          colors: colors.length ? colors : [{ name: "Standard", hex: "#171717" }],
+          images: [document.getElementById('formProdImageUrl').value.trim()],
+          fabric: document.getElementById('formProdFabric').value.trim(),
+          fit: document.getElementById('formProdFit').value.trim(),
+          description: document.getElementById('formProdDesc').value.trim(),
+          isTrending: document.getElementById('checkTrending').checked,
+          isNewArrival: document.getElementById('checkNewArrival').checked,
+          isBestSeller: document.getElementById('checkBestSeller').checked,
+          rating: 4.8,
+          reviewCount: 1,
+          status: 'active'
+        };
+
+        ProductStore.saveProduct(productData);
+        showToast("Product successfully saved to catalog!", "success");
+        setTimeout(() => {
+          window.location.href = 'products.html';
+        }, 800);
+      });
+    });
+  </script>
+</body>
+</html>
+
